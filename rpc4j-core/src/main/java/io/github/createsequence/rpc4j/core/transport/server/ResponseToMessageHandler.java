@@ -1,7 +1,7 @@
 package io.github.createsequence.rpc4j.core.transport.server;
 
 import io.github.createsequence.rpc4j.core.support.handler.Depends;
-import io.github.createsequence.rpc4j.core.support.handler.InvocationHandlerDelegate;
+import io.github.createsequence.rpc4j.core.support.handler.RequiredAttributeCheckHandlerDelegate;
 import io.github.createsequence.rpc4j.core.support.handler.RpcInvocation;
 import io.github.createsequence.rpc4j.core.support.handler.RpcInvocationHandler;
 import io.github.createsequence.rpc4j.core.transport.Attributes;
@@ -22,10 +22,21 @@ import java.util.Objects;
     @Depends.Attr(name = Attributes.COMPRESSION_TYPE, type = Byte.class, required = true),
     @Depends.Attr(name = Attributes.SERIALIZATION_TYPE, type = Byte.class, required = true)
 })
-public class ResponseToMessageHandler extends InvocationHandlerDelegate {
+public class ResponseToMessageHandler extends RequiredAttributeCheckHandlerDelegate {
 
     public ResponseToMessageHandler(RpcInvocationHandler delegate) {
         super(delegate);
+    }
+
+    /**
+     * 获取依赖注解
+     *
+     * @return 依赖注解
+     */
+    @Nullable
+    @Override
+    protected Depends retrieveDependsAnnotation() {
+        return this.getClass().getDeclaredAnnotation(Depends.class);
     }
 
     /**

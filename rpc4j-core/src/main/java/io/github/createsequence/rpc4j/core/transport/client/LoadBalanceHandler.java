@@ -3,11 +3,12 @@ package io.github.createsequence.rpc4j.core.transport.client;
 import io.github.createsequence.common.ComponentManager;
 import io.github.createsequence.rpc4j.core.loadbalance.LoadBalancer;
 import io.github.createsequence.rpc4j.core.support.handler.Depends;
-import io.github.createsequence.rpc4j.core.support.handler.InvocationHandlerDelegate;
+import io.github.createsequence.rpc4j.core.support.handler.RequiredAttributeCheckHandlerDelegate;
 import io.github.createsequence.rpc4j.core.support.handler.RpcInvocation;
 import io.github.createsequence.rpc4j.core.support.handler.RpcInvocationHandler;
 import io.github.createsequence.rpc4j.core.transport.Attributes;
 import io.github.createsequence.rpc4j.core.transport.RemoteAddress;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.List;
 
@@ -17,9 +18,9 @@ import java.util.List;
  * @author huangchengxing
  */
 @Depends(
-    @Depends.Attr(name = Attributes.LOAD_BALANCE_STRATEGY, type = String.class)
+    @Depends.Attr(name = Attributes.LOAD_BALANCE_STRATEGY, type = String.class, required = true)
 )
-public class LoadBalanceHandler extends InvocationHandlerDelegate {
+public class LoadBalanceHandler extends RequiredAttributeCheckHandlerDelegate {
 
     private final ComponentManager componentManager;
 
@@ -30,6 +31,17 @@ public class LoadBalanceHandler extends InvocationHandlerDelegate {
     }
 
     /**
+     * 获取依赖注解
+     *
+     * @return 依赖注解
+     */
+    @Nullable
+    @Override
+    protected Depends retrieveDependsAnnotation() {
+        return this.getClass().getDeclaredAnnotation(Depends.class);
+    }
+
+    /**
      * 调用前处理
      *
      * @param rpcInvocation 调用参数
@@ -37,6 +49,7 @@ public class LoadBalanceHandler extends InvocationHandlerDelegate {
      */
     @Override
     protected RpcInvocation beforeInvoke(RpcInvocation rpcInvocation) {
+        rpcInvocation = super.beforeInvoke(rpcInvocation);
         List<RemoteAddress> addresses = rpcInvocation.getRemoteAddresses();
         LoadBalancer loadBalancer = componentManager.getComponent(LoadBalancer.class, rpcInvocation.getAttribute(Attributes.LOAD_BALANCE_STRATEGY));
         RemoteAddress address = loadBalancer.select(addresses, rpcInvocation);

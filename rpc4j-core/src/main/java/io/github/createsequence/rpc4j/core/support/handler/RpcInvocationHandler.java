@@ -3,7 +3,7 @@ package io.github.createsequence.rpc4j.core.support.handler;
 import io.github.createsequence.common.Ordered;
 
 /**
- * 调用处理器，客户端通过该接口向服务端发起方法调用，而服务端通过该接口执行方法调用
+ * Rpc调用处理器，客户端通过该接口向服务端发起方法调用，而服务端通过该接口执行方法调用
  *
  * @author huangchengxing
  */

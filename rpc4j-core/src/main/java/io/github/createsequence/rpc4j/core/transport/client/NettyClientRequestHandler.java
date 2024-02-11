@@ -49,7 +49,7 @@ import java.util.concurrent.locks.LockSupport;
  * @author huangchengxing
  */
 @Depends({
-    @Depends.Attr(name = Attributes.REMOTE_ADDRESS, type = InetSocketAddress.class, required = true),
+    @Depends.Attr(name = Attributes.REMOTE_ADDRESS, type = RemoteAddress.class, required = true),
     @Depends.Attr(name = Attributes.REQUEST_TIMEOUT, type = Long.class),
     @Depends.Attr(name = Attributes.REQUEST_TIMEOUT_UNIT, type = TimeUnit.class),
     @Depends.Attr(name = Attributes.REQUEST_PROTOCOL_VERSION, type = Byte.class, required = true),

@@ -1,6 +1,8 @@
 package io.github.createsequence.rpc4j.core.support.handler;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Objects;
@@ -16,7 +18,20 @@ public abstract class InvocationHandlerDelegate implements RpcInvocationHandler 
     /**
      * 委托对象
      */
+    @NonNull
+    @Getter
     private final RpcInvocationHandler delegate;
+
+    /**
+     * <p>获取排序值。<br />
+     * 值越小，对象的优先级越高。
+     *
+     * @return 排序值
+     */
+    @Override
+    public int getOrder() {
+        return delegate.getOrder();
+    }
 
     /**
      * 执行方法调用

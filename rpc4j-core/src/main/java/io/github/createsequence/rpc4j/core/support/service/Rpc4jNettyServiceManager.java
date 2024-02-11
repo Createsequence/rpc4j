@@ -2,6 +2,7 @@ package io.github.createsequence.rpc4j.core.support.service;
 
 import io.github.createsequence.common.ComponentManager;
 import io.github.createsequence.rpc4j.core.discoverer.ServiceDiscoverer;
+import io.github.createsequence.rpc4j.core.support.handler.RequiredAttributeCheckHandlerDelegate;
 import io.github.createsequence.rpc4j.core.support.handler.RpcInvocationHandler;
 import io.github.createsequence.rpc4j.core.transport.RemoteAddress;
 import io.github.createsequence.rpc4j.core.transport.Rpc4jProtocol;
@@ -57,6 +58,7 @@ public class Rpc4jNettyServiceManager implements ServiceRegistry, ServiceProvide
 
         // 客户端组件
         RpcInvocationHandler serverInvocationHandler = new NettyClientRequestHandler(componentManager);
+        serverInvocationHandler = new RequiredAttributeCheckHandlerDelegate(serverInvocationHandler);
         serverInvocationHandler = Objects.nonNull(serviceDiscoverer) ?
             new ServiceDiscoveryLoadBalanceHandler(serverInvocationHandler, componentManager, serviceDiscoverer) :
             new LoadBalanceHandler(serverInvocationHandler, componentManager);

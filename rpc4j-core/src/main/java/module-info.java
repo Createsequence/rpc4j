@@ -2,6 +2,7 @@
  * @author huangchengxing
  */
 module rpc4j.core {
+    
     requires static lombok;
     requires org.checkerframework.checker.qual;
     requires org.slf4j;
