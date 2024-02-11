@@ -1,8 +1,8 @@
 package io.github.createsequence.common.util;
 
-import io.github.createsequence.common.Rpc4jException;
 import io.github.createsequence.common.ParameterNameFinder;
 import io.github.createsequence.common.ReflectiveParameterNameFinder;
+import io.github.createsequence.common.exception.Rpc4jException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;

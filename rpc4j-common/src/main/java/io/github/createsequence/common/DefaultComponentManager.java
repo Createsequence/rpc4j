@@ -11,6 +11,8 @@ import io.github.createsequence.common.util.Asserts;
  */
 public class DefaultComponentManager implements ComponentManager {
 
+    // TODO 支持SPI机制
+
     private final Table<Class<?>, String, Object> registeredComponents = HashBasedTable.create();
 
     /**

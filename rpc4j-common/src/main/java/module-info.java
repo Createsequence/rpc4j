@@ -10,4 +10,5 @@ module rpc4j.common {
 
     exports io.github.createsequence.common.util;
     exports io.github.createsequence.common;
+    exports io.github.createsequence.common.exception;
 }

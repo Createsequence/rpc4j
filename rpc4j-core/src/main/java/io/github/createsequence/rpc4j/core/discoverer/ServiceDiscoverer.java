@@ -1,6 +1,7 @@
 package io.github.createsequence.rpc4j.core.discoverer;
 
-import java.net.InetSocketAddress;
+import io.github.createsequence.rpc4j.core.transport.RemoteAddress;
+
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public interface ServiceDiscoverer {
      * @param serviceName 服务名称
      * @return 服务地址
      */
-    List<InetSocketAddress> getServices(String serviceName);
+    List<RemoteAddress> getServices(String serviceName);
 
     /**
      * 注册服务
@@ -24,7 +25,7 @@ public interface ServiceDiscoverer {
      * @param serviceName 服务名称
      * @param address    服务地址
      */
-    void registerService(String serviceName, InetSocketAddress address);
+    void registerService(String serviceName, RemoteAddress address);
 
     /**
      * 移除服务
@@ -32,5 +33,5 @@ public interface ServiceDiscoverer {
      * @param serviceName 服务名称
      * @param address   服务地址
      */
-    void removeService(String serviceName, InetSocketAddress address);
+    void unregisterService(String serviceName, RemoteAddress address);
 }

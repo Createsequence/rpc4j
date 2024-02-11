@@ -1,6 +1,6 @@
 package io.github.createsequence.common.util;
 
-import io.github.createsequence.common.Rpc4jException;
+import io.github.createsequence.common.exception.Rpc4jException;
 import org.junit.Assert;
 import org.junit.Test;
 
